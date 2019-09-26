@@ -83,4 +83,17 @@ public class ProductController {
         return "product/view";
     }
 
+
+    @GetMapping("/search-product")
+    public  String searchProduct(){
+        return "product/searchForm";
+    }
+    @PostMapping("/searchProductResult")
+    public ModelAndView searchProductResult(@RequestParam("search-by-name") String name){
+        List<Product> productSearchList= productService.findByName(name);
+        ModelAndView modelAndView = new ModelAndView("product/searchResult");
+        modelAndView.addObject("productSearchList", productSearchList);
+        return modelAndView ;
+    }
+
 }
